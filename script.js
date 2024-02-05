@@ -6,7 +6,10 @@ const soundOnButton = document.querySelector('.sound-on')
 const soundOffButton = document.querySelector('.sound-off')
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
-let inputMinutes = Number(minutesDisplay.textContent);
+const modalInput = document.querySelector('.modal-input')
+const defineMinutesButton = document.querySelector('.defineMinutesButton')
+const inputMinutes = document.querySelector('#inputMinutes')
+let minutes = Number(minutesDisplay.textContent);
 let countDownInterval
 
 playButton.addEventListener('click', ()=>{
@@ -18,13 +21,12 @@ playButton.addEventListener('click', ()=>{
 
 pausebutton.addEventListener('click', () => {
   playPauseToggle();
-  updateTimerDisplay(inputMinutes, 0)
   clearInterval(countDownInterval)
 })
 
 stopButton.addEventListener('click', () => {
   stopToggle();
-  updateTimerDisplay(inputMinutes, 0)
+  updateTimerDisplay(minutes, 0)
   clearInterval(countDownInterval)
 
 })
@@ -38,10 +40,15 @@ soundOffButton.addEventListener('click', () => {
 })
 
 setButton.addEventListener('click', () => {
-  inputMinutes = prompt('digite a quantidade de minutos')
-  minutesDisplay.textContent = inputMinutes.padStart(2,'0')
-
+  modalToggle()
 })
+
+defineMinutesButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  modalToggle()
+  updateTimerDisplay(inputMinutes.value, 0)
+})
+
 
 function countDown() {
   countDownInterval = setInterval(() => {
@@ -49,7 +56,7 @@ function countDown() {
     let minutes = Number(minutesDisplay.textContent)
 
     if (seconds === 0 && minutes > 0){
-      seconds = 10
+      seconds = 60
       updateTimerDisplay(--minutes, 60)
       
     }else if (seconds === 0 && minutes === 0){
@@ -61,6 +68,9 @@ function countDown() {
   }, 1000);
 }
 
+function modalToggle() {
+  modalInput.classList.toggle('hide')
+}
 
 function updateTimerDisplay(minutes, seconds) {
   minutesDisplay.textContent = String(minutes).padStart(2, '0')

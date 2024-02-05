@@ -6,8 +6,8 @@
 
 :root {
   --bg-color: #121214;
-  --base-color:194;
-  --bg-primary-light : hsla(var(--base-color), 100%, 63%, 0.13);
+  --base-color: 194;
+  --bg-primary-light: hsla(var(--base-color), 100%, 63%, 0.13);
   --primary-color: hsl(var(--base-color), 100%, 63%);
   --text-color: #fff;
 
@@ -40,7 +40,7 @@ button {
 }
 
 
-.play svg path ,
+.play svg path,
 .pause svg path,
 .sound-on path {
   fill: var(--primary-color);
@@ -51,7 +51,7 @@ button svg {
 }
 
 #timer {
-  font-size: clamp(3rem,4rem + 10vw,8.8rem);
+  font-size: clamp(3rem, 4rem + 10vw, 8.8rem);
   display: flex;
   margin-bottom: 1.6rem;
 }
@@ -72,4 +72,47 @@ footer {
   justify-self: end;
   align-self: flex-end;
   padding: 0 4rem 3.2rem 0;
+}
+
+/*modal-input*/
+
+.modal-input {
+  margin-top: 2rem;
+  width: 23rem;
+  padding: 1.5rem;
+  background-color: var(--bg-primary-light);
+  border-radius: 9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper input {
+  border: none;
+  border-radius: .3rem;
+  width: 15rem;
+  height: 3.5rem;
+  background: var(--bg-primary-light);
+  color: #fff;
+  margin-top: .5rem;
+}
+
+.input-wrapper label {
+  font-size: 2rem;
+}
+
+.modal-input button {
+  background-color: var(--primary-color);
+  justify-self: center;
+  margin-top: 1rem;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: white;
 }
