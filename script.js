@@ -1,3 +1,5 @@
+import { Timer } from "./timer.js"
+
 const playButton = document.querySelector('.play')
 const pausebutton = document.querySelector('.pause')
 const stopButton = document.querySelector('.stop')
@@ -10,24 +12,25 @@ const modalInput = document.querySelector('.modal-input')
 const defineMinutesButton = document.querySelector('.defineMinutesButton')
 const inputMinutes = document.querySelector('#inputMinutes')
 let minutes = Number(minutesDisplay.textContent);
-let countDownInterval
+
+
+const timer = Timer({minutesDisplay,secondsDisplay,stopToggle,minutes})
 
 playButton.addEventListener('click', ()=>{
   playPauseToggle();
   stopSetTpggle();
-  countDown();
+  timer.countDown();
 
 })
 
 pausebutton.addEventListener('click', () => {
   playPauseToggle();
-  clearInterval(countDownInterval)
+  timer.StopTimer()
 })
 
 stopButton.addEventListener('click', () => {
   stopToggle();
-  updateTimerDisplay(minutes, 0)
-  clearInterval(countDownInterval)
+  timer.resetTimer()
 
 })
 
@@ -46,36 +49,14 @@ setButton.addEventListener('click', () => {
 defineMinutesButton.addEventListener('click', (e) => {
   e.preventDefault()
   modalToggle()
-  updateTimerDisplay(inputMinutes.value, 0)
+
+  timer.updateTimerDisplay(inputMinutes.value, 0)
 })
-
-
-function countDown() {
-  countDownInterval = setInterval(() => {
-    let seconds = Number(secondsDisplay.textContent)
-    let minutes = Number(minutesDisplay.textContent)
-
-    if (seconds === 0 && minutes > 0){
-      seconds = 60
-      updateTimerDisplay(--minutes, 60)
-      
-    }else if (seconds === 0 && minutes === 0){
-      stopToggle()
-      clearInterval(countDownInterval)
-      return
-    }
-    updateTimerDisplay(minutes, --seconds)
-  }, 1000);
-}
 
 function modalToggle() {
   modalInput.classList.toggle('hide')
 }
 
-function updateTimerDisplay(minutes, seconds) {
-  minutesDisplay.textContent = String(minutes).padStart(2, '0')
-  secondsDisplay.textContent = String(seconds).padStart(2,'0')
-}
 
 function playPauseToggle() {
   playButton.classList.toggle('hide')
