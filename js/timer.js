@@ -1,5 +1,6 @@
-
+import sound from "./sounds.js"
 export function Timer({minutesDisplay,secondsDisplay,resetControls,minutes}){
+  
   let returTime
   let countDownInterval
 
@@ -38,6 +39,7 @@ export function Timer({minutesDisplay,secondsDisplay,resetControls,minutes}){
         resetControls()
         clearInterval(countDownInterval)
         updateTimerDisplay(returTime,0)
+        sound().timeEnd()
         return
       }
       updateTimerDisplay(minutes, --seconds)

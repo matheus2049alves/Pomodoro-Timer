@@ -1,5 +1,6 @@
 import { Timer } from "./timer.js"
 import { Countrols } from "./controls.js"
+import Sounds from "./sounds.js"
 
 const playButton = document.querySelector('.play')
 const pausebutton = document.querySelector('.pause')
@@ -18,30 +19,37 @@ let minutes = Number(minutesDisplay.textContent);
 
 const controls = Countrols({playButton,pausebutton,stopButton,setButton})
 const timer = Timer({ minutesDisplay, secondsDisplay, resetControls : controls.reset, minutes })
+const sound = Sounds()
 
 playButton.addEventListener('click', () => {
   controls.play()
   timer.countDown();
+  sound.pressButton()
 
 })
 
 pausebutton.addEventListener('click', () => {
   controls.pause();
   timer.StopTimer()
+  sound.pressButton()
 })
 
 stopButton.addEventListener('click', () => {
   controls.reset();
   timer.resetTimer()
+  sound.pressButton()
 
 })
 
 soundOnButton.addEventListener('click', () => {
   soundToggle();
+  sound.soundBg.pause()
 })
 
 soundOffButton.addEventListener('click', () => {
   soundToggle();
+  
+  sound.soundBg.play()
 })
 
 setButton.addEventListener('click', () => {

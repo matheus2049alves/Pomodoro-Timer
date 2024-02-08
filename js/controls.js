@@ -10,7 +10,8 @@ export function Countrols({playButton,pausebutton,stopButton,setButton}){
 
   function play() {
     playPauseToggle()
-    setToStop()
+    stopButton.classList.remove('hide')
+    setButton.classList.add('hide')
   }
 
   function pause() {
@@ -20,11 +21,6 @@ export function Countrols({playButton,pausebutton,stopButton,setButton}){
   function playPauseToggle() {
     playButton.classList.toggle('hide')
     pausebutton.classList.toggle('hide')
-  }
-
-  function setToStop() {
-    stopButton.classList.remove('hide')
-    setButton.classList.add('hide')
   }
 
   return {
