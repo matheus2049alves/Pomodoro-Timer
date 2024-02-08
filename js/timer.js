@@ -1,6 +1,6 @@
 
-export function Timer({minutesDisplay,secondsDisplay,stopToggle,minutes}){
-
+export function Timer({minutesDisplay,secondsDisplay,resetControls,minutes}){
+  let returTime
   let countDownInterval
 
   function updateTimerDisplay(minutes, seconds) {
@@ -10,7 +10,13 @@ export function Timer({minutesDisplay,secondsDisplay,stopToggle,minutes}){
 
   function resetTimer() {
     updateTimerDisplay(minutes, 0)
+    clearInterval(countDownInterval)
     
+  }
+
+  function updateMinutes(newMinutes) {
+    minutes = newMinutes
+    returTime = newMinutes
   }
 
   function StopTimer (){
@@ -29,8 +35,9 @@ export function Timer({minutesDisplay,secondsDisplay,stopToggle,minutes}){
         updateTimerDisplay(--minutes, 60)
         
       }else if (seconds === 0 && minutes === 0){
-        stopToggle()
+        resetControls()
         clearInterval(countDownInterval)
+        updateTimerDisplay(returTime,0)
         return
       }
       updateTimerDisplay(minutes, --seconds)
@@ -42,6 +49,7 @@ export function Timer({minutesDisplay,secondsDisplay,stopToggle,minutes}){
     updateTimerDisplay,
     countDown,
     resetTimer,
-    StopTimer
+    StopTimer,
+    updateMinutes
   }
 }

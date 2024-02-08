@@ -1,4 +1,5 @@
 import { Timer } from "./timer.js"
+import { Countrols } from "./controls.js"
 
 const playButton = document.querySelector('.play')
 const pausebutton = document.querySelector('.pause')
@@ -14,22 +15,23 @@ const inputMinutes = document.querySelector('#inputMinutes')
 let minutes = Number(minutesDisplay.textContent);
 
 
-const timer = Timer({minutesDisplay,secondsDisplay,stopToggle,minutes})
 
-playButton.addEventListener('click', ()=>{
-  playPauseToggle();
-  stopSetTpggle();
+const controls = Countrols({playButton,pausebutton,stopButton,setButton})
+const timer = Timer({ minutesDisplay, secondsDisplay, resetControls : controls.reset, minutes })
+
+playButton.addEventListener('click', () => {
+  controls.play()
   timer.countDown();
 
 })
 
 pausebutton.addEventListener('click', () => {
-  playPauseToggle();
+  controls.pause();
   timer.StopTimer()
 })
 
 stopButton.addEventListener('click', () => {
-  stopToggle();
+  controls.reset();
   timer.resetTimer()
 
 })
@@ -51,29 +53,13 @@ defineMinutesButton.addEventListener('click', (e) => {
   modalToggle()
 
   timer.updateTimerDisplay(inputMinutes.value, 0)
+  timer.updateMinutes(inputMinutes.value)
 })
 
 function modalToggle() {
   modalInput.classList.toggle('hide')
 }
 
-
-function playPauseToggle() {
-  playButton.classList.toggle('hide')
-  pausebutton.classList.toggle('hide')
-}
-
-function stopSetTpggle(){
-  stopButton.classList.remove('hide')
-  setButton.classList.add('hide')
-}
-
-function stopToggle() {
-  playButton.classList.remove('hide')
-  pausebutton.classList.add('hide')
-  stopButton.classList.toggle('hide')
-  setButton.classList.toggle('hide')
-}
 
 function soundToggle() {
   soundOffButton.classList.toggle('hide')
